@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getCurrentUser } from '../../../redux/actions/authAction';
-import { updateProviderProfile } from '../../../redux/actions/authAction';
+import { user_register } from '../../../redux/actions/authAction';
 
 const Submit_Form = () => {
 
@@ -44,7 +44,7 @@ const Submit_Form = () => {
 
     function onSubmit(e) {
         console.log(e,'============>>>')
-        // dispatch(updateProviderProfile(e, router))
+        dispatch(user_register(e, router))
     }
 
     return (

@@ -2,5 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/user/user_submit_form": "pages/user/user_submit_form.js"
+  "/admin/user": "pages/admin/user.js",
+  "/user/user_submit_form": "pages/user/user_submit_form.js",
+  "/success": "pages/success.js"
 }

@@ -6,9 +6,6 @@ export default function Index() {
     return (
         <>
             <Login />
-
-            {/* <Layout >
-            </Layout> */}
         </>
     )
 }

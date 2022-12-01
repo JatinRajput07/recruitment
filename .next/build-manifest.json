@@ -25,6 +25,16 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/admin/user": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/admin/user.js"
+    ],
+    "/success": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/success.js"
+    ],
     "/user/user_submit_form": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

@@ -31,6 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "mdi-material-ui": "^7.6.0",
     "morgan": "^1.10.0",
+    "mui-datatables": "^4.2.2",
     "mysql2": "^2.3.3",
     "next": "^13.0.5",
     "next-redux-wrapper": "^8.0.0",

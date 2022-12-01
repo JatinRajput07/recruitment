@@ -1,7 +1,7 @@
 // import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Layout from '../components/Layout/Layout'
-// import Home from '../components/View/Home/Home'
+import DashBoard from '../components/View/admin/DashBoard'
 
 
 
@@ -11,7 +11,7 @@ export default function Index() {
       <div id="wrapper">
 
         <Layout>
-            <p></p>
+          <DashBoard />
         </Layout>
       </div>
 

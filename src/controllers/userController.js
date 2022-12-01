@@ -74,7 +74,8 @@ exports.protect = catchAsync(async (req, res, next) => {
 |----------------------------------------------------------------------------------------------------------------
 */
 
-exports.adminCreate = catchAsync(async (req, res, next) => {
+exports.Create = catchAsync(async (req, res, next) => {
+
     const v = new Validator(req.body, {
         full_name: 'required',
         family_name: 'required',
@@ -83,10 +84,12 @@ exports.adminCreate = catchAsync(async (req, res, next) => {
         zip_code: 'required',
         city: 'required',
         email: 'required|email',
-        password: 'required|minLength:6|maxLength:12',
-        image: 'required',
+        // password: 'required|minLength:6|maxLength:12',
+        // image: 'required',
         phone: 'required',
+        country: 'required',
         address: 'required',
+        state: 'required'
     });
 
     var errorsResponse
@@ -107,12 +110,20 @@ exports.adminCreate = catchAsync(async (req, res, next) => {
         return next(new AppError(errorsResponse, 400));
     }
 
-    const { email, role, password } = req.body
+    const { email, role, password, phone } = req.body
     const emailExist = await db.users.findOne({ where: { email: email }, raw: true })
+
     if (emailExist) {
         return next(new AppError('Email already exist', 400));
     }
-    req.body.password = await bcrypt.hash(password, 12)
+    const phoneExist = await db.users.findOne({ where: { phone: phone }, raw: true })
+    if (phoneExist) {
+        return next(new AppError('phone already exist', 400));
+    }
+    if (req.body.password) {
+        req.body.password = await bcrypt.hash(password, 12)
+    }
+
     let user = await db.users.create(req.body)
     const token = JWT.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
     user.token = token
@@ -179,4 +190,21 @@ exports.update_profile = catchAsync(async (req, res, next) => {
 
     const user = await db.users.findOne({ where: { id: req.user.id } })
     return success(res, 'Profile get successfull', 200, user)
+})
+
+
+/*
+|----------------------------------------------------------------------------------------------------------------
+|   admin Controllers
+|----------------------------------------------------------------------------------------------------------------
+*/
+
+exports.userList = catchAsync(async (req, res, next) => {
+    const user = await db.users.findAll({where:{role:{ $ne:1 }}})
+    return success(res, 'facth all users successfully', 200, user)
+})
+
+exports.getUser = catchAsync(async (req, res, next) => {
+    const user = await db.users.findAll({where:{id:req.params.id}})
+    return success(res, 'Get user Detail successfully', 200, user)
 })

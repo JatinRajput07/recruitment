@@ -34,12 +34,9 @@ export const readNotifications = (data) => async(dispatch) => {
 }
 
 export const getNotifications = () => async(dispatch) => {
-
     try {
 
         const res = await get(`/api/getNotifications`);
-       
-        
         if(res.success){
             dispatch(setNotifications(res.body))
         }
@@ -53,11 +50,8 @@ export const getNotifications = () => async(dispatch) => {
 }
 
 export const getCms = (type) => async(dispatch) => {
-
     try {
-
         const res = await get(`/api/cms?type=${type}`)
-
         console.log(res)
         if(res.success){
         //     // dispatch(setSuccess(res.msg));           
@@ -105,6 +99,41 @@ export const getFaqs = (data) => async(dispatch) => {
     } catch (err) {
         console.log(err)
         dispatch(setFailed(err.response.data.msg))
+    }
+}
+
+
+export const userList = (data) => async(dispatch) => {
+    try {
+        const res = await get(`/api/v1/admin/userList`)
+        console.log(res,'=====userslist====');
+        if(res.status == true){
+            dispatch(setUserList(res.data))
+            dispatch(setSuccess('Fetch all users Successfull'));           
+            setTimeout(() => {
+                dispatch(clearAlerts())
+            }, 1000);
+        }
+    } catch (err) {
+        console.log(err)
+        dispatch(setFailed(err.response.data.msg))
+    }
+}
+
+export const getUser = (data) => async(dispatch) => {
+    try {
+        const res = await get(`/api/v1/admin/getUser/${data}`)
+        console.log(res,'=====userslist====');
+        if(res.status == true){
+            dispatch(setUserList(res.data))
+            dispatch(setSuccess(res.message));           
+            setTimeout(() => {
+                dispatch(clearAlerts())
+            }, 1000);
+        }
+    } catch (err) {
+        console.log(err)
+        dispatch(setFailed(err.response.data.msg && err.response.data.message))
     }
 }
 
@@ -188,5 +217,10 @@ const setFaqs = (payload)=> ({
 
 const setNotifications = (payload)=> ({
     type : constants.SET_NOTIFICATIONS,
+    payload
+})
+
+const setUserList = (payload)=> ({
+    type : constants.SET_USER_LIST,
     payload
 })

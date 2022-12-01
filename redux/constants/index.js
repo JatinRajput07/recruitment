@@ -68,6 +68,9 @@ export const SET_ITEM = 'SET_ITEM';
 
 export const SET_FAQS = 'SET_FAQS'
 
+
+export const SET_USER_LIST = 'SET_USER_LIST'
+
 // CMS
 export const SET_CMS = "SET_CMS"
 

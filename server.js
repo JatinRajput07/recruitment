@@ -72,7 +72,7 @@ nextapp.prepare().then(() => {
   });
 
   // 3) ROUTES
-  server.use('/api/v1/admin', userRouter);
+  server.use('/api/v1', userRouter);
 
 
   server.get('*', (req, res) => {

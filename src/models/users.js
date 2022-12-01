@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
       comment: "0 = User , 1 => Admin",
-      defaultValue:''
+      defaultValue:0
     },
     image: {
       type: DataTypes.STRING(255),

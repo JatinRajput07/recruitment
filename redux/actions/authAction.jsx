@@ -36,20 +36,24 @@ export const register = (data, router) => async (dispatch) => {
 export const user_register = (data, router) => async (dispatch) => {
     try {
         dispatch(clearAlerts())
-        const res = await post(`/api/v1/user/signup`, data)
-        if (res.status == 'success') {
+        const res = await post(`/api/v1/user/Create`, data)
+        
+        console.log(res,'============')
+
+        if (res.status == true) {
             dispatch(registerSuccess(res.data))
             dispatch(setSuccess('Signup SuccessFull'));
             // dispatch(setUserDetail({name: res.body.name, image: res.body.image.original }))
-            sessionStorage.setItem('user', JSON.stringify(res.data))
-            sessionStorage.setItem('authToken', res.token)
-            sessionStorage.setItem('isAuthenticated', true)
-            router.push('/');
+            // sessionStorage.setItem('user', JSON.stringify(res.data))
+            // sessionStorage.setItem('authToken', res.token)
+            // sessionStorage.setItem('isAuthenticated', true)
+            router.push('/success');
             setTimeout(() => {
                 dispatch(clearAlerts())
             }, 1000);
         }
     } catch (err) {
+        console.log(err,'=====>>>====>>>=--')
         dispatch(setFailed(err.response.data.message))
     }
 }

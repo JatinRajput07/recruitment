@@ -1,31 +1,32 @@
 import * as constants from '../constants';
 
 const initialState = {
-   home: [],
-   faqs: [],
-   notifications: []
+    home: [],
+    faqs: [],
+    notifications: [],
+    users: []
 };
 
-export const userReducer  = (state= initialState, action) =>{
+export const userReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case constants.SET_HOME_DATA:
             return {
                 ...state,
-                home : action.payload
+                home: action.payload
             }
-            
+
         //     break;
         case constants.SET_FAQS:
             return {
                 ...state,
-                faqs : action.payload
+                faqs: action.payload
             }
-            
+
         case constants.SET_CMS:
             return {
                 ...state,
-                cms : action.payload
+                cms: action.payload
             }
 
         case constants.SET_NOTIFICATIONS:
@@ -33,11 +34,16 @@ export const userReducer  = (state= initialState, action) =>{
                 ...state,
                 notifications: action.payload
             }
-            
+        case constants.SET_USER_LIST:
+            return {
+                ...state,
+                users: action.payload
+            }
+
         //     break;
-    
+
         default:
-        return state
+            return state
     }
 
 }
