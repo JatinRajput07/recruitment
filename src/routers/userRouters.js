@@ -16,4 +16,7 @@ router.get('/admin/getUser/:id',userController.getUser)
 router.get('/admin/me', protect,userController.me)
 
 
+
+router.get('/admin/page/:page',userController.getPages)
+
 module.exports = router

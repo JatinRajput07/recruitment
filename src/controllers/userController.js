@@ -133,7 +133,7 @@ exports.Create = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
     const v = new Validator(req.body, {
-        role:"required|integer",
+        role: "required|integer",
         email: 'required|email',
         password: 'required|minLength:6|maxLength:12',
     });
@@ -156,12 +156,12 @@ exports.login = catchAsync(async (req, res, next) => {
         return next(new AppError(errorsResponse, 400));
     }
 
-    
+
     const { email, password } = req.body
 
-    console.log(req.body,'=======>>>')
+    console.log(req.body, '=======>>>')
     // return
-    
+
 
     let user = await db.users.findOne({ where: { email: email }, raw: true })
     if (!user) {
@@ -210,13 +210,37 @@ exports.update_profile = catchAsync(async (req, res, next) => {
 */
 
 exports.userList = catchAsync(async (req, res, next) => {
-    let user = await db.users.findAll({where:{role:{ $ne:1 }}})
+    let user = await db.users.findAll({ where: { role: { $ne: 1 } } })
     user.password = undefined
     return success(res, 'facth all users successfully', 200, user)
 })
 
 exports.getUser = catchAsync(async (req, res, next) => {
-    let user = await db.users.findAll({where:{id:req.user.id}})
+    let user = await db.users.findAll({ where: { id: req.user.id } })
     user.password = undefined
     return success(res, 'Get user Detail successfully', 200, user)
+})
+
+
+
+/*
+|----------------------------------------------------------------------------------------------------------------
+|   CMS Controllers
+|----------------------------------------------------------------------------------------------------------------
+*/
+
+exports.getPages = catchAsync(async (req, res) => {
+    const { page } = req.params;
+    condition = {};
+
+    if (page == 'termsAndConditions') {
+        condition = { accessor: 'termsAndConditions' };
+    } else if (page == 'privacy&policy') {
+        condition = { accessor: 'privacyPolicy' };
+    } else if (page == 'about') {
+        condition = { accessor: 'aboutUs' };
+    }
+
+    let content = await db.page.findOne({ where: condition });
+    return success(res, 'Get data successfully', 200, content)
 })
