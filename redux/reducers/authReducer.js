@@ -45,8 +45,8 @@ const initialState = {
                 ...state,
                 user: action.payload,
                 name: action.payload.name,
-                image: action.payload.image.original,
-                authToken: action.payload.accessToken,
+                image: action.payload.image,
+                authToken: action.payload.token,
                 isAuthenticated: true,
                 role:action.payload.role
                 // success: action.payload.msg,

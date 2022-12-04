@@ -10,7 +10,7 @@ export default function Index() {
     <>
       <div id="wrapper">
 
-        <Layout>
+        <Layout  requireAuth={true}>
           <DashBoard />
         </Layout>
       </div>

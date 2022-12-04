@@ -25,20 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/admin/user": [
+    "/admin/cms": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/admin/user.js"
-    ],
-    "/success": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/success.js"
-    ],
-    "/user/user_submit_form": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/user/user_submit_form.js"
+      "static/chunks/pages/admin/cms.js"
     ]
   },
   "ampFirstPages": []

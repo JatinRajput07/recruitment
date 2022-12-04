@@ -13,7 +13,7 @@ router.get('/admin/userList',userController.userList)
 router.get('/admin/getUser/:id',userController.getUser)
 
 
-router.get('/me', protect,userController.me)
+router.get('/admin/me', protect,userController.me)
 
 
 module.exports = router

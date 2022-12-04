@@ -109,7 +109,7 @@ export const userList = (data) => async(dispatch) => {
         console.log(res,'=====userslist====');
         if(res.status == true){
             dispatch(setUserList(res.data))
-            dispatch(setSuccess('Fetch all users Successfull'));           
+            // dispatch(setSuccess('Fetch all users Successfull'));           
             setTimeout(() => {
                 dispatch(clearAlerts())
             }, 1000);

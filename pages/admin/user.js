@@ -6,7 +6,7 @@ export default function Index() {
     return (
         <>
             <div id="wrapper">
-                <Layout>
+                <Layout requireAuth={true}>
                     <UserList />
                 </Layout>
             </div>

@@ -133,6 +133,7 @@ exports.Create = catchAsync(async (req, res, next) => {
 
 exports.login = catchAsync(async (req, res, next) => {
     const v = new Validator(req.body, {
+        role:"required|integer",
         email: 'required|email',
         password: 'required|minLength:6|maxLength:12',
     });
@@ -155,7 +156,12 @@ exports.login = catchAsync(async (req, res, next) => {
         return next(new AppError(errorsResponse, 400));
     }
 
+    
     const { email, password } = req.body
+
+    console.log(req.body,'=======>>>')
+    // return
+    
 
     let user = await db.users.findOne({ where: { email: email }, raw: true })
     if (!user) {
@@ -169,14 +175,18 @@ exports.login = catchAsync(async (req, res, next) => {
 
     const token = JWT.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE });
     user.token = token
+    user.password = undefined
     return success(res, 'Login succesfully', 200, user)
 
 })
 
+
 exports.me = catchAsync(async (req, res, next) => {
     const user = await db.users.findOne({ where: { id: req.user.id } })
+    user.password = undefined
     return success(res, 'Profile get successfull', 200, user)
 })
+
 
 exports.update_profile = catchAsync(async (req, res, next) => {
     console.log(req.body, '=====?')
@@ -200,11 +210,13 @@ exports.update_profile = catchAsync(async (req, res, next) => {
 */
 
 exports.userList = catchAsync(async (req, res, next) => {
-    const user = await db.users.findAll({where:{role:{ $ne:1 }}})
+    let user = await db.users.findAll({where:{role:{ $ne:1 }}})
+    user.password = undefined
     return success(res, 'facth all users successfully', 200, user)
 })
 
 exports.getUser = catchAsync(async (req, res, next) => {
-    const user = await db.users.findAll({where:{id:req.params.id}})
+    let user = await db.users.findAll({where:{id:req.user.id}})
+    user.password = undefined
     return success(res, 'Get user Detail successfully', 200, user)
 })
